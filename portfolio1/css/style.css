@@ -774,7 +774,106 @@ img {
     resize: vertical;
 }
 
-/* Footer */
+/* Terminal Section Styles */
+.terminal {
+    background-color: #1a1a1a; /* Dark background for the terminal section */
+    color: #00ff00; /* Green text, classic terminal look */
+    padding: 80px 0;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+}
+
+.terminal-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.terminal-window {
+    background-color: #0d0d0d; /* Even darker for the window itself */
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); /* Neon green glow */
+    overflow: hidden;
+}
+
+.terminal-header {
+    background-color: #2a2a2a;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.terminal-buttons {
+    display: flex;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.terminal-button.red { background-color: #ff5f57; }
+.terminal-button.yellow { background-color: #ffbd2e; }
+.terminal-button.green { background-color: #28c940; }
+
+.terminal-title {
+    color: #ccc;
+    font-size: 0.9em;
+    margin-left: auto; /* Pushes title to the right if buttons are on left */
+    padding-right: 10px;
+}
+
+.terminal-body {
+    padding: 15px;
+    height: 300px; /* Adjust as needed */
+    overflow-y: auto;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+#terminalOutput p {
+    margin: 0 0 5px 0;
+    white-space: pre-wrap; /* Preserve whitespace and newlines */
+    word-break: break-all;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    color: #00ff00; /* Green prompt */
+    margin-right: 8px;
+}
+
+.terminal-input {
+    color: #00ff00; /* Green input text */
+    flex-grow: 1;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.cursor {
+    background-color: #00ff00; /* Green cursor */
+    width: 8px; /* Width of the cursor block */
+    height: 1.2em; /* Height of the cursor, relative to font size */
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+/* Footer Styles */
 .footer {
     background: var(--secondary-bg);
     padding: 30px 5%;
