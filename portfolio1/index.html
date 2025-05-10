@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Cyberpunk Theme</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#home">Portfolio</a>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="home-content">
+            <h1>Hi, I'm <span class="highlight">Your Name</span></h1>
+            <div class="typing-text">I'm a <span id="typing"></span></div>
+            <p>Welcome to my portfolio website. Explore my work and get in touch!</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn primary-btn">View Projects</a>
+                <a href="#contact" class="btn secondary-btn">Contact Me</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#about"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-header">
+            <h2>About <span class="highlight">Me</span></h2>
+            <div class="underline"></div>
+        </div>
+        <div class="about-content">
+            <div class="about-img">
+                <div class="img-border">
+                    <img src="images/profile.jpg" alt="Profile Picture">
+                </div>
+            </div>
+            <div class="about-text">
+                <h3>Who am I?</h3>
+                <p>I am a passionate developer with expertise in web development. I love creating beautiful, functional websites and applications that provide great user experiences.</p>
+                <p>With a strong foundation in HTML, CSS, and JavaScript, I build responsive and interactive web solutions that meet modern standards and requirements.</p>
+                <div class="personal-info">
+                    <div class="info-item">
+                        <span class="info-title">Name:</span>
+                        <span class="info-value">Your Name</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-title">Email:</span>
+                        <span class="info-value">your.email@example.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-title">Location:</span>
+                        <span class="info-value">Your Location</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-title">Availability:</span>
+                        <span class="info-value">Available for freelance</span>
+                    </div>
+                </div>
+                <a href="#" class="btn primary-btn">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="section-header">
+            <h2>My <span class="highlight">Skills</span></h2>
+            <div class="underline"></div>
+        </div>
+        <div class="skills-content">
+            <div class="skill-category">
+                <h3>Frontend Development</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <p>HTML</p>
+                            <p>90%</p>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-percent="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <p>CSS</p>
+                            <p>85%</p>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-percent="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <p>JavaScript</p>
+                            <p>80%</p>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-percent="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Other Skills</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <p>UI/UX Design</p>
+                            <p>75%</p>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-percent="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <p>Responsive Design</p>
+                            <p>85%</p>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-percent="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <p>Problem Solving</p>
+                            <p>90%</p>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-percent="90"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="section-header">
+            <h2>My <span class="highlight">Projects</span></h2>
+            <div class="underline"></div>
+        </div>
+        <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="app">App</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+        </div>
+        <div class="projects-container">
+            <div class="project-card" data-category="web">
+                <div class="project-img">
+                    <img src="images/project1.jpg" alt="Project 1">
+                </div>
+                <div class="project-content">
+                    <h3>Project Title 1</h3>
+                    <p>Web Development</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                        <a href="#" class="project-github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="app">
+                <div class="project-img">
+                    <img src="images/project2.jpg" alt="Project 2">
+                </div>
+                <div class="project-content">
+                    <h3>Project Title 2</h3>
+                    <p>App Development</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                        <a href="#" class="project-github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="design">
+                <div class="project-img">
+                    <img src="images/project3.jpg" alt="Project 3">
+                </div>
+                <div class="project-content">
+                    <h3>Project Title 3</h3>
+                    <p>UI/UX Design</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                        <a href="#" class="project-github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="web">
+                <div class="project-img">
+                    <img src="images/project4.jpg" alt="Project 4">
+                </div>
+                <div class="project-content">
+                    <h3>Project Title 4</h3>
+                    <p>Web Development</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                        <a href="#" class="project-github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <h2>Contact <span class="highlight">Me</span></h2>
+            <div class="underline"></div>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p>your.email@example.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="contact-details">
+                        <h3>Phone</h3>
+                        <p>+1 234 567 890</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-details">
+                        <h3>Location</h3>
+                        <p>Your City, Country</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2023 Your Name. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
