@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Typing effect
     const typingElement = document.getElementById('typing');
-    const words = ['Web Developer', 'UI/UX Designer', 'Freelancer', 'Problem Solver'];
+    const words = ['IoT Hardware Developer', 'AI Specialist', 'Embedded Systems Engineer', 'AI Agent Developer'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
