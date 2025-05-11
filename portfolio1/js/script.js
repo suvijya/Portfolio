@@ -49,39 +49,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Typing effect
     const typingElement = document.getElementById('typing');
-    const words = ['IoT Hardware Developer', 'AI Specialist', 'Embedded Systems Engineer', 'AI Agent Developer'];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingDelay = 200;
+    // Check if the typing element exists before starting the animation
+    if (typingElement) {
+        const words = ['IoT Hardware Developer', 'AI Specialist', 'Embedded Systems Engineer', 'AI Agent Developer'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingDelay = 200;
 
-    function type() {
-        const currentWord = words[wordIndex];
-        
-        if (isDeleting) {
-            typingElement.textContent = currentWord.substring(0, charIndex - 1);
-            charIndex--;
-            typingDelay = 100;
-        } else {
-            typingElement.textContent = currentWord.substring(0, charIndex + 1);
-            charIndex++;
-            typingDelay = 200;
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+                typingDelay = 100;
+            } else {
+                typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+                typingDelay = 200;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                typingDelay = 1000; // Pause at end of word
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typingDelay = 500; // Pause before typing next word
+            }
+
+            setTimeout(type, typingDelay);
         }
 
-        if (!isDeleting && charIndex === currentWord.length) {
-            isDeleting = true;
-            typingDelay = 1000; // Pause at end of word
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            typingDelay = 500; // Pause before typing next word
-        }
-
-        setTimeout(type, typingDelay);
+        // Start typing effect
+        setTimeout(type, 1000);
+    } else {
+        console.error("Element with ID 'typing' not found. Typing animation will not start.");
     }
-
-    // Start typing effect
-    setTimeout(type, 1000);
 
     // Animate skill bars when in viewport
     const skillBars = document.querySelectorAll('.skill-progress');
