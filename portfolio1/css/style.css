@@ -1042,20 +1042,40 @@ img {
 }
 .tech-icons-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 32px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     justify-items: center;
     align-items: center;
     padding: 20px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.html-icon i::before {
+    content: "\f13b";
+    font-family: "Font Awesome 5 Brands";
+}
+
+.css-icon i::before {
+    content: "\f38b";
+    font-family: "Font Awesome 5 Brands";
+}
+
+.js-icon i::before {
+    content: "\f3b9";
+    font-family: "Font Awesome 5 Brands";
 }
 .tech-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: var(--card-bg);
     border: 2px solid var(--border-color);
     border-radius: 16px;
-    padding: 24px 12px 12px 12px;
+    padding: 20px;
+    width: 140px;
+    height: 140px;
     box-shadow: 0 4px 24px var(--shadow-color);
     transition: var(--transition), box-shadow 0.2s;
     cursor: pointer;
@@ -1067,6 +1087,19 @@ img {
     box-shadow: 0 0 24px var(--primary-color), 0 0 40px var(--accent-color);
     transform: translateY(-6px) scale(1.06);
     background: linear-gradient(135deg, var(--secondary-bg) 60%, var(--primary-color) 100%);
+}
+
+/* HTML, CSS, JS Icons */
+.html-icon {
+    color: #E34F26;
+}
+
+.css-icon {
+    color: #1572B6;
+}
+
+.js-icon {
+    color: #F7DF1E;
 }
 .tech-icon i {
     font-size: 3rem;
