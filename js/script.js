@@ -1,5 +1,24 @@
 // Wait for DOM to fully load
 document.addEventListener('DOMContentLoaded', function() {
+    // SUPABASE INTEGRATION - Initialize Supabase client
+    // IMPORTANT: Replace with your actual Supabase URL and Anon Key
+    const SUPABASE_URL = 'https://dlhldbsvrrcwshndjxbw.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsaGxkYnN2cnJjd3NobmRqeGJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcxNTEyNjksImV4cCI6MjA2MjcyNzI2OX0.bslf92lZ8xAMB14eqTtN2kZP5Y4Fzu-SvU0Tx2lwUaI';
+    let supabaseClient = null; 
+    try {
+        if (window.supabase && typeof window.supabase.createClient === 'function') {
+            const { createClient } = window.supabase;
+            supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log('Supabase client initialized.');
+        } else {
+            console.error('Supabase library not loaded or createClient is not a function.');
+            alert('Supabase library not loaded. Contact form may not work. Check console.');
+        }
+    } catch (error) { 
+        console.error('Error initializing Supabase client (during createClient):', error.message);
+        alert('Error initializing Supabase. Contact form may not work. Check console for details.');
+    }
+
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('.nav-links ul li a');
@@ -385,15 +404,61 @@ document.addEventListener('DOMContentLoaded', () => {
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
-            // Here you would typically send the form data to a server
-            // For demo purposes, we'll just log it and show an alert
-            console.log('Form submitted:', { name, email, subject, message });
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            
-            // Reset form
-            contactForm.reset();
+            // Send the form data to Supabase
+            if (!supabaseClient) {
+                alert('Supabase is not initialized. Cannot send message.');
+                console.error('Supabase client not available for form submission.');
+                return;
+            }
+
+            supabaseClient
+                .from('messages') // IMPORTANT: Replace 'messages' with your actual table name
+                .insert([
+                    { name: name, email: email, subject: subject, message: message, created_at: new Date() }
+                ])
+                .then(response => {
+                    if (response.error) {
+                        throw response.error;
+                    }
+                    console.log('Success:', response.data);
+                    alert('Thank you for your message! It has been sent.');
+                    contactForm.reset();
+                })
+                .catch((error) => {
+                    console.error('Error sending message to Supabase:', error);
+                    alert('There was an error sending your message. Please try again. Details: ' + error.message);
+                });
+
+            // Old fetch call (commented out or removed)
+            /* fetch('/api/submit-message', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, subject, message }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Thank you for your message! It has been sent.');
+                contactForm.reset();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('There was an error sending your message. Please try again.');
+            }); */
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, subject, message }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Thank you for your message! It has been sent.');
+                contactForm.reset();
+            })
         });
     }
 

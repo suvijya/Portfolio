@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Messages</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/style.css"> <!-- Assuming a shared stylesheet -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a; /* Dark theme consistent with portfolio */
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #2c2c2c;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,255,255,0.2);
+        }
+        h1 {
+            color: #00ffff; /* Cyberpunk cyan */
+            text-align: center;
+            border-bottom: 2px solid #00ffff;
+            padding-bottom: 10px;
+        }
+        .message-list {
+            list-style: none;
+            padding: 0;
+        }
+        .message-item {
+            background-color: #333;
+            border: 1px solid #444;
+            border-left: 5px solid #00ffff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .message-item h3 {
+            margin-top: 0;
+            color: #f0f0f0;
+        }
+        .message-item p {
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+        .message-item .meta {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+        .no-messages {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+        }
+        /* Basic responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Received Messages</h1>
+        <div id="messageDisplayArea">
+            <!-- Messages will be loaded here by JavaScript -->
+            <p class="no-messages">Loading messages or no messages yet...</p>
+        </div>
+    </div>
+
+    <script>
+        // IMPORTANT: Replace with your actual Supabase URL and Anon Key
+        const SUPABASE_URL = 'https://dlhldbsvrrcwshndjxbw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsaGxkYnN2cnJjd3NobmRqeGJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcxNTEyNjksImV4cCI6MjA2MjcyNzI2OX0.bslf92lZ8xAMB14eqTtN2kZP5Y4Fzu-SvU0Tx2lwUaI';
+        let supabaseClient = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                if (window.supabase && typeof window.supabase.createClient === 'function') {
+                    const { createClient } = window.supabase;
+                    supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    console.log('Supabase client initialized for admin page.');
+                    fetchMessages();
+                } else {
+                    console.error('Supabase library not loaded or createClient is not a function on admin page.');
+                    const displayArea = document.getElementById('messageDisplayArea');
+                    displayArea.innerHTML = '<p class="no-messages">Supabase library not loaded. Cannot load messages. Check console.</p>';
+                }
+            } catch (error) {
+                console.error('Error initializing Supabase client for admin page (during createClient):', error.message);
+                const displayArea = document.getElementById('messageDisplayArea');
+                displayArea.innerHTML = '<p class="no-messages">Error initializing Supabase. Cannot load messages. Check console for details.</p>';
+            }
+        });
+
+        async function fetchMessages() {
+            if (!supabaseClient) {
+                console.error('Supabase client not available for fetching messages.');
+                const displayArea = document.getElementById('messageDisplayArea');
+                displayArea.innerHTML = '<p class="no-messages">Supabase is not initialized. Cannot load messages.</p>';
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('messages') // IMPORTANT: Replace 'messages' with your actual table name
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    throw error;
+                }
+                displayMessages(data);
+            } catch (error) {
+                console.error('Error fetching messages from Supabase:', error);
+                const displayArea = document.getElementById('messageDisplayArea');
+                displayArea.innerHTML = '<p class="no-messages">Error loading messages. Please try again later. Details: ' + error.message + '</p>';
+            }
+        }
+
+        // Old fetchMessages function (commented out or removed for reference)
+        /* function fetchMessages() {
+            fetch('/api/messages') // Fetch messages from the backend API
+                .then(response => { */
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayMessages(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching messages:', error);
+                    const displayArea = document.getElementById('messageDisplayArea');
+                    displayArea.innerHTML = '<p class="no-messages">Error loading messages. Please try again later.</p>';
+                });
+            
+        } */
+
+        function displayMessages(messages) {
+            const displayArea = document.getElementById('messageDisplayArea');
+            displayArea.innerHTML = ''; // Clear loading/default text
+
+            if (!messages || messages.length === 0) {
+                displayArea.innerHTML = '<p class="no-messages">No messages found.</p>';
+                return;
+            }
+
+            const ul = document.createElement('ul');
+            ul.className = 'message-list';
+
+            messages.forEach(msg => {
+                const li = document.createElement('li');
+                li.className = 'message-item';
+                li.innerHTML = `
+                    <h3>${escapeHTML(msg.subject)}</h3>
+                    <p><strong>From:</strong> ${escapeHTML(msg.name)} (${escapeHTML(msg.email)})</p>
+                    <p><strong>Message:</strong></p>
+                    <p>${escapeHTML(msg.message).replace(/\n/g, '<br>')}</p>
+                    <p class="meta">Received: ${escapeHTML(new Date(msg.created_at).toLocaleString())}</p>
+                `;
+                ul.appendChild(li);
+            });
+
+            displayArea.appendChild(ul);
+        }
+
+        // Utility function to escape HTML to prevent XSS
+        function escapeHTML(str) {
+            if (typeof str !== 'string') return '';
+            return str.replace(/[&<>'"\/]/g, function (s) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;',
+                    '/': '&#x2F;'
+                }[s];
+            });
+        }
+
+        // Note: For a real application:
+        // 1. You would need a backend (e.g., Node.js, Python/Flask, PHP) to receive and store messages from your contact form.
+        // 2. The contact form in index.html would need to be updated to send data to this backend endpoint.
+        // 3. This admin_messages.html page would fetch messages from a secure backend endpoint.
+        // 4. Consider adding authentication to this admin page to protect message privacy.
+    </script>
+</body>
+</html>
